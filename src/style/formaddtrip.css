@@ -1,0 +1,105 @@
+h2.add-trip-title {
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: left;
+    margin-left: 250px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: '#FF6185';
+}
+
+.form-add-trip {
+    margin: auto;
+    width: 70vw;
+}
+
+.form-add-trip .form-input {
+    background-color: rgb(217, 219, 219) !important;
+}
+
+
+.form-dropdown{
+    position: relative;
+}
+
+.form-add-trip .dropdown {
+    width: 15px !important;
+    height: 10px !important;
+    position: absolute;
+    top: 47px !important;
+    right: 13px !important;
+}
+
+.duration {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.day, .night {
+    width: 20%;
+    margin-right: 30px;
+}
+
+.label-day, .label-night {
+    margin: 0px !important;
+    margin-right: 50px !important;
+}
+
+.button-add-trip {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    margin: auto !important;
+    margin-top:50px !important;
+    margin-bottom: 50px !important;
+    background-color: #FF6185;
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+/* Input Upload Image */
+.img-upload {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+  }
+  
+  .img-upload label {
+    width: 30%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+  }
+  
+  .img-upload input {
+    display: none;
+  }
+  
+  .img-upload p {
+    padding: 5px;
+    padding-left: 10px;
+    text-align: left;
+    color: orange;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .img-upload p:hover {
+    cursor: pointer;
+  }
+  
+  .img-upload label img {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  .img-upload label img:hover {
+    cursor: pointer;
+  }
+  /* End input upload image */

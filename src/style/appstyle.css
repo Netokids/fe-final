@@ -1,0 +1,30 @@
+.Button1{
+    color: #FF6185;
+    width: 100px;
+    margin-right: 10px;
+    border-color: #FF6185;
+}
+
+.Button2{
+    color: white;
+    width: 100px;
+    background-color: #FF6185;
+}
+
+.img1{
+    color: #fff;
+}
+
+.card{
+    width: 350px;
+    height: 350px;
+    background: #FFFFFF;
+    border-radius: 5px;
+}
+
+.test {
+    height: 15vh;
+    width: '100%';
+    background-size:cover;
+    border-bottom: 0.2px solid black;
+}   
