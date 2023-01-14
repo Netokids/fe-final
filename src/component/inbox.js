@@ -113,12 +113,9 @@ const Inbox = () => {
 
                                 </Card>
                             )
-                        } else{
-                            return <>
-                                <h1>Anda Belum Pernah Melakukan Konsuktasi</h1>
-                            </>
-
+                        } else {
                         }
+
                     })}
 
                 </div>

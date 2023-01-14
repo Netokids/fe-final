@@ -14,6 +14,8 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setAuthToken } from './config/api';
 import { API } from './config/api';
+import PrivatePatient from './component/privateRoutePatient';
+import PrivateAdmin from './component/privateAdmin';
 
 function App() {
   let navigate = useNavigate()
@@ -37,6 +39,8 @@ function App() {
       }
     }
   }, [state]);
+
+  console.log(state)
 
   const checkUser = async () => {
     try {
@@ -71,14 +75,22 @@ function App() {
 
       <NavigationBar />
       <Routes>
+
+
         <Route path="/" element={<Home />} />
-        <Route path="/profile/:id" element={<Profile />}></Route>
+        <Route element={<PrivatePatient />}>
+          <Route path="/konsultasi" element={<FormConsultation />} /> 
+          <Route path="/profile/:id" element={<Profile />}></Route>
+          <Route path="/inbox/:id" element={<Inbox />} />
+        </Route>
+        <Route element={<PrivateAdmin />}>
+          <Route path="/formReservasi" element={<FormReservasi />} />
+          <Route path="/formArticle" element={<FormArticle />} />
+          <Route path="/profileDr" element={<ProfileDr />} />
+        </Route>
+
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/konsultasi" element={<FormConsultation />} />
-        <Route path="/inbox/:id" element={<Inbox />} />
-        <Route path="/profileDr" element={<ProfileDr />} />
-        <Route path="/formArticle" element={<FormArticle />} />
-        <Route path="/formReservasi" element={<FormReservasi />} />
+
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </>

@@ -54,7 +54,7 @@ const FormConsultation = () => {
 
             const response = await API.post('/consultations', formData, config);
             alert('Konsultasi Berhasil, Harap Menunggu Balasan dari Dokter');
-            navigate('/inbox')
+            navigate('/inbox/:id')
         } catch (error) {
             console.log(error);
         }

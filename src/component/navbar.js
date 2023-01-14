@@ -4,17 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../style/appstyle.css"
 import Icon from "../assets/image/icon_corona.png";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { API } from "../config/api";
 import addArticle from "../assets/image/addArticle.png";
 import Logout from "../assets/image/logout.png";
 import ImageNav from "../assets/image/ImgNav.png";
 import Profile from "../assets/image/navuser.png";
 import Consultation from "../assets/image/emailnav.png";
-
 const NavigationBar = () => {
     let navigate = useNavigate();
     const [show, setShow] = useState(false);
@@ -125,217 +124,217 @@ const NavigationBar = () => {
     };
 
 
-
     return (
-        <Navbar className="test">
-            <Container>
-                <Navbar.Brand >
-                    <img src={Icon} alt="Icon" className="img1" onClick={
-                        () => navigate('/')
-                    } />
-                </Navbar.Brand>
-                <Navbar.Collapse className="nav justify-content-end" style={{
-                    paddingTop: '18px'
-                }}>
+        <>
+            <Navbar className="test">
+                <Container>
+                    <Navbar.Brand >
+                        <img src={Icon} alt="Icon" className="img1"/>
+                    </Navbar.Brand>
+                    <Navbar.Collapse className="nav justify-content-end" style={{
+                        paddingTop: '18px'
+                    }}>
 
-                    {state.isLogin === true ? <>
-                        {state.user.role === "admin" ?
-                            <>
-                                <Dropdown>
-                                    <Dropdown.Toggle id="dropdown-basic" style={{
-                                        backgroundColor: 'transparent',
-                                        border: 'none',
-                                    }}>
-                                        <img src={ImageNav} alt="" style={{
-                                            width: '60px',
-                                            height: '60px',
-                                        }} />
-                                    </Dropdown.Toggle>
+                        {state.isLogin === true ? <>
+                            {state.user.role === "doctor" ?
+                                <>
+                                    <Dropdown>
+                                        <Dropdown.Toggle id="dropdown-basic" style={{
+                                            backgroundColor: 'transparent',
+                                            border: 'none',
+                                        }}>
+                                            <img src={ImageNav} alt="" style={{
+                                                width: '60px',
+                                                height: '60px',
+                                            }} />
+                                        </Dropdown.Toggle>
 
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item
-                                            onClick={() => navigate('/profileDr')}
-                                        ><img src={Profile} alt="" style={{
-                                            margin: '10px'
-                                        }}></img>Profile</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => navigate('/formArticle')}><img src={addArticle} alt="" style={{
-                                            margin: '10px'
-                                        }}></img>Add Article</Dropdown.Item>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item
+                                                onClick={() => navigate('/profileDr')}
+                                            ><img src={Profile} alt="" style={{
+                                                margin: '10px'
+                                            }}></img>Profile</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => navigate('/formArticle')}><img src={addArticle} alt="" style={{
+                                                margin: '10px'
+                                            }}></img>Add Article</Dropdown.Item>
 
-                                        <Dropdown.Item onClick={handleLogout}><img src={Logout} alt="" style={{
-                                            margin: '10px'
-                                        }}></img>Logout</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </>
-                            :
-                            <>
-                                <Dropdown>
-                                    <Dropdown.Toggle id="dropdown-basic" style={{
-                                        backgroundColor: 'transparent',
-                                        border: 'none',
-                                    }}>
-                                        <img src={ImageNav} alt="" style={{
-                                            width: '60px',
-                                            height: '60px',
-                                        }} />
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item onClick={() => navigate(`/profile/${state?.user.id}`)}><img src={Profile} alt="" style={{
-                                            margin: '10px'
-                                        }}></img>Profile</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => navigate(`/inbox/${state?.user.id}`)}><img src={Consultation} alt="" style={{
-                                            margin: '10px'
-                                        }}></img>Consultation</Dropdown.Item>
+                                            <Dropdown.Item onClick={handleLogout}><img src={Logout} alt="" style={{
+                                                margin: '10px'
+                                            }}></img>Logout</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </>
+                                :
+                                <>
+                                    <Dropdown>
+                                        <Dropdown.Toggle id="dropdown-basic" style={{
+                                            backgroundColor: 'transparent',
+                                            border: 'none',
+                                        }}>
+                                            <img src={ImageNav} alt="" style={{
+                                                width: '60px',
+                                                height: '60px',
+                                            }} />
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item onClick={() => navigate(`/profile/${state?.user.id}`)}><img src={Profile} alt="" style={{
+                                                margin: '10px'
+                                            }}></img>Profile</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => navigate(`/inbox/${state?.user.id}`)}><img src={Consultation} alt="" style={{
+                                                margin: '10px'
+                                            }}></img>Consultation</Dropdown.Item>
 
-                                        <Dropdown.Item onClick={handleLogout}><img src={Logout} alt="" style={{
-                                            margin: '10px'
-                                        }}></img>Logout</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </>
-                        }
-                    </> : <>
-                        <Button className="Button1" variant="outline-light" onClick={handleShow2} >Sign In</Button>
-                        <Modal show={show2} onHide={handleClose2}>
-                            <Modal.Title style={{
-                                textAlign: 'center',
-                                fontFamily: 'Product Sans',
-                                fontWeight: '700',
-                                fontSize: '36px',
-                                padding: '20px'
-                            }}>Sign In</Modal.Title>
+                                            <Dropdown.Item onClick={handleLogout}><img src={Logout} alt="" style={{
+                                                margin: '10px'
+                                            }}></img>Logout</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </>
+                            }
+                        </> : <>
+                            <Button className="Button1" variant="outline-light" onClick={handleShow2} >Sign In</Button>
+                            <Modal show={show2} onHide={handleClose2}>
+                                <Modal.Title style={{
+                                    textAlign: 'center',
+                                    fontFamily: 'Product Sans',
+                                    fontWeight: '700',
+                                    fontSize: '36px',
+                                    padding: '20px'
+                                }}>Sign In</Modal.Title>
 
-                            <Modal.Body>
-                                <Form  >
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control
-                                            name="email"
-                                            type="email"
-                                            onChange={(e) => handleChangeLog(e)}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group
-                                        className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1"
-                                    >
-                                        <Form.Label>Password</Form.Label>
-                                        <Form.Control
-                                            name='password'
-                                            type='password' rows={3}
-                                            onChange={(e) => handleChangeLog(e)}
-                                        />
-                                    </Form.Group>
-                                </Form>
-                            </Modal.Body>
-                            <Button style={{
-                                width: '80%',
-                                margin: 'auto',
-                                marginBottom: '20px',
-                                backgroundColor: '#FF6185',
-                            }} onClick={(e) => handleSubmitLog.mutate(e)}>
-                                Sign in
-                            </Button>
-                            <h1 style={{
-                                textAlign: 'center',
-                                fontFamily: 'avenir',
-                                fontWeight: '400',
-                                fontSize: '18px',
-                                color: '#B1B1B1',
-                                padding: '0px 0px 0px 0px'
-                            }}>Don't have an account? <u style={{
-                                cursor: 'pointer'
-                            }} onClick={handleShow}> Click Here</u></h1>
-                        </Modal>
+                                <Modal.Body>
+                                    <Form  >
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>Email</Form.Label>
+                                            <Form.Control
+                                                name="email"
+                                                type="email"
+                                                onChange={(e) => handleChangeLog(e)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group
+                                            className="mb-3"
+                                            controlId="exampleForm.ControlTextarea1"
+                                        >
+                                            <Form.Label>Password</Form.Label>
+                                            <Form.Control
+                                                name='password'
+                                                type='password' rows={3}
+                                                onChange={(e) => handleChangeLog(e)}
+                                            />
+                                        </Form.Group>
+                                    </Form>
+                                </Modal.Body>
+                                <Button style={{
+                                    width: '80%',
+                                    margin: 'auto',
+                                    marginBottom: '20px',
+                                    backgroundColor: '#FF6185',
+                                }} onClick={(e) => handleSubmitLog.mutate(e)}>
+                                    Sign in
+                                </Button>
+                                <h1 style={{
+                                    textAlign: 'center',
+                                    fontFamily: 'avenir',
+                                    fontWeight: '400',
+                                    fontSize: '18px',
+                                    color: '#B1B1B1',
+                                    padding: '0px 0px 0px 0px'
+                                }}>Don't have an account? <u style={{
+                                    cursor: 'pointer'
+                                }} onClick={handleShow}> Click Here</u></h1>
+                            </Modal>
 
-                        {/* Button Register */}
-                        <Button className="Button2" onClick={handleShow}>Sign Up</Button>
-                        <Modal show={show} onHide={handleClose}>
+                            {/* Button Register */}
+                            <Button className="Button2" onClick={handleShow}>Sign Up</Button>
+                            <Modal show={show} onHide={handleClose}>
 
-                            <Modal.Title style={{
-                                textAlign: 'center',
-                                fontFamily: 'Product Sans',
-                                fontWeight: '700',
-                                fontSize: '36px',
-                                padding: '20px'
-                            }}>Sign Up</Modal.Title>
+                                <Modal.Title style={{
+                                    textAlign: 'center',
+                                    fontFamily: 'Product Sans',
+                                    fontWeight: '700',
+                                    fontSize: '36px',
+                                    padding: '20px'
+                                }}>Sign Up</Modal.Title>
 
-                            <Modal.Body>
-                                <Form >
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Fullname</Form.Label>
-                                        <Form.Control
-                                            name="fullname"
-                                            type="text"
-                                            onChange={(e) => handleChange(e)}
+                                <Modal.Body>
+                                    <Form >
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>Fullname</Form.Label>
+                                            <Form.Control
+                                                name="fullname"
+                                                type="text"
+                                                onChange={(e) => handleChange(e)}
 
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control
-                                            name="email"
-                                            type="email"
-                                            onChange={(e) => handleChange(e)}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group
-                                        className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1"
-                                    >
-                                        <Form.Label>Password</Form.Label>
-                                        <Form.Control
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>Email</Form.Label>
+                                            <Form.Control
+                                                name="email"
+                                                type="email"
+                                                onChange={(e) => handleChange(e)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group
+                                            className="mb-3"
+                                            controlId="exampleForm.ControlTextarea1"
+                                        >
+                                            <Form.Label>Password</Form.Label>
+                                            <Form.Control
 
-                                            name="password"
-                                            type='password' rows={3}
-                                            required
-                                            onChange={(e) => handleChange(e)}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Phone</Form.Label>
-                                        <Form.Control
-                                            name='phone'
-                                            type="number"
-                                            autoFocus
-                                            onChange={(e) => handleChange(e)}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                        <Form.Label>Gender</Form.Label>
-                                        <Form.Select aria-label="Default select example" name='gender' onChange={(e) => handleChange(e)}>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </Form.Select>
-                                    </Form.Group>
-                                    <Form.Group
-                                        className="mb-3"
-                                        controlId="exampleForm.ControlTextarea1">
-                                        <Form.Label>Address</Form.Label>
-                                        <Form.Control
-                                            name='address'
-                                            as="textarea" rows={3}
-                                            onChange={(e) => handleChange(e)}
-                                        />
+                                                name="password"
+                                                type='password' rows={3}
+                                                required
+                                                onChange={(e) => handleChange(e)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>Phone</Form.Label>
+                                            <Form.Control
+                                                name='phone'
+                                                type="number"
+                                                autoFocus
+                                                onChange={(e) => handleChange(e)}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>Gender</Form.Label>
+                                            <Form.Select aria-label="Default select example" name='gender' onChange={(e) => handleChange(e)}>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </Form.Select>
+                                        </Form.Group>
+                                        <Form.Group
+                                            className="mb-3"
+                                            controlId="exampleForm.ControlTextarea1">
+                                            <Form.Label>Address</Form.Label>
+                                            <Form.Control
+                                                name='address'
+                                                as="textarea" rows={3}
+                                                onChange={(e) => handleChange(e)}
+                                            />
 
-                                    </Form.Group>
-                                </Form>
-                            </Modal.Body>
-                            <Button style={{
-                                width: '80%',
-                                margin: 'auto',
-                                marginBottom: '20px',
-                                backgroundColor: '#FF6185',
-                            }} onClick={(e) => handleSubmit.mutate(e)}>
-                                Register
-                            </Button>
-                        </Modal>
-                    </>}
+                                        </Form.Group>
+                                    </Form>
+                                </Modal.Body>
+                                <Button style={{
+                                    width: '80%',
+                                    margin: 'auto',
+                                    marginBottom: '20px',
+                                    backgroundColor: '#FF6185',
+                                }} onClick={(e) => handleSubmit.mutate(e)}>
+                                    Register
+                                </Button>
+                            </Modal>
+                        </>}
 
-                </Navbar.Collapse>
-            </Container>
-        </Navbar >
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar >
+        </>
+
     )
 }
 

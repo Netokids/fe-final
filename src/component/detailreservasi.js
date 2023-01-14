@@ -57,7 +57,7 @@ const ModalReservation = ({ show, setShow, value, reservasiId }) => {
 
             const response = await API.patch(`/consultations/${reservasiId}`, formData, config);
 
-            alert('Konsultasi Berhasil, Harap Menunggu Balasan dari Dokter');
+            alert('Anda Telah Menyetujui Konsultasi Pasien');
             setShow(false);
             navigate('/formReservasi')
 
@@ -90,7 +90,7 @@ const ModalReservation = ({ show, setShow, value, reservasiId }) => {
 
             const response = await API.patch(`/consultations/${reservasiId}`, formData, config);
 
-            alert('Konsultasi Berhasil, Harap Menunggu Balasan dari Dokter');
+            alert('Anda Telah Menolak Konsultasi Pasien');
             setShow(false);
             navigate('/formReservasi')
 

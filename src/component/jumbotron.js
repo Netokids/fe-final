@@ -7,9 +7,17 @@ import Eyes from "../assets/image/Eyes.png";
 import Crowd from "../assets/image/Crowd.png";
 import Home from "../assets/image/House.png";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
+import { useContext } from "react";
+
 
 const Jumbotron = () => {
     let navigate = useNavigate()
+    const [state] = useContext(UserContext);
+    const handleLogin = () => {
+        navigate("/")
+        alert('Harap Login Telebih Dahulu')
+    }
     return (
         <div style={{
             backgroundColor: '#FF6185',
@@ -59,37 +67,47 @@ const Jumbotron = () => {
                         height: '140px',
                         marginLeft: '100px',
                     }}>
-                        <Button style={{
-                            width: '450px',
-                            height: '120px',
-                            backgroundColor: '#FFFFFF',
-                        }} onClick={() => navigate('/konsultasi')}>
-                            <img src={Dokter_button} alt="Dokter_button" style={{
-                                width: '410px',
-                            }} />
-                        </Button>
-                    </div>
-                </Col>
-                <Col xs={6} style={{
-                    marginTop: '100px',
-                }}>
-                    <Row>
-                        <Col xs={3}>
-                            <img src={Crowd} alt="Crowd" />
-                        </Col>
-                        <Col xs={3}>
-                            <img src={Hand} alt="Hand" />
-                        </Col>
-                        <Col xs={3}>
-                            <img src={Eyes} alt="Eyes" />
-                        </Col>
-                        <Col xs={3}>
-                            <img src={Home} alt="Home" />
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        </div>
+                        {state.isLogin === true ? <>
+                            <Button style={{
+                                width: '450px',
+                                height: '120px',
+                                backgroundColor: '#FFFFFF',
+                            }} onClick={() => navigate('/konsultasi')}>
+                                <img src={Dokter_button} alt="Dokter_button" style={{
+                                    width: '410px',
+                                }} />
+                            </Button></> :
+                            <><Button style={{
+                                width: '450px',
+                                height: '120px',
+                                backgroundColor: '#FFFFFF',
+                            }} onClick={handleLogin}>
+                                <img src={Dokter_button} alt="Dokter_button" style={{
+                                    width: '410px',
+                                }} />
+                            </Button></>}
+                </div>
+            </Col>
+            <Col xs={6} style={{
+                marginTop: '100px',
+            }}>
+                <Row>
+                    <Col xs={3}>
+                        <img src={Crowd} alt="Crowd" />
+                    </Col>
+                    <Col xs={3}>
+                        <img src={Hand} alt="Hand" />
+                    </Col>
+                    <Col xs={3}>
+                        <img src={Eyes} alt="Eyes" />
+                    </Col>
+                    <Col xs={3}>
+                        <img src={Home} alt="Home" />
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
+        </div >
     )
 }
 
