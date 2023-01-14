@@ -46,8 +46,7 @@ const Article = () => {
                                     }}>{item.title}</Card.Title>
                                     <Card.Text style={{
                                         textAlign: 'left',
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis',
+                                        maxWidth: '100%',
                                     }}>
                                         {item.description}
                                     </Card.Text>

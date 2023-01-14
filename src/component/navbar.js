@@ -14,6 +14,9 @@ import Logout from "../assets/image/logout.png";
 import ImageNav from "../assets/image/ImgNav.png";
 import Profile from "../assets/image/navuser.png";
 import Consultation from "../assets/image/emailnav.png";
+import DoctorNav from "../assets/image/doctornav.png";
+
+
 const NavigationBar = () => {
     let navigate = useNavigate();
     const [show, setShow] = useState(false);
@@ -129,7 +132,7 @@ const NavigationBar = () => {
             <Navbar className="test">
                 <Container>
                     <Navbar.Brand >
-                        <img src={Icon} alt="Icon" className="img1"/>
+                        <img src={Icon} alt="Icon" className="img1" onClick={()=> navigate('/')}/>
                     </Navbar.Brand>
                     <Navbar.Collapse className="nav justify-content-end" style={{
                         paddingTop: '18px'
@@ -143,7 +146,7 @@ const NavigationBar = () => {
                                             backgroundColor: 'transparent',
                                             border: 'none',
                                         }}>
-                                            <img src={ImageNav} alt="" style={{
+                                            <img src={DoctorNav} alt="" style={{
                                                 width: '60px',
                                                 height: '60px',
                                             }} />

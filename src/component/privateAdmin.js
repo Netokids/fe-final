@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 
 function PrivatePatient(){
-    const [state,] = useContext(UserContext);
+    const [state] = useContext(UserContext);
     if(state.isLogin && state.user.role === "doctor"){
         return <Outlet />
     } else {

@@ -7,8 +7,16 @@ import Gender from "../assets/image/gender.png";
 import Phone from "../assets/image/phone.png";
 import Place from "../assets/image/place.png";
 import Dokter from "../assets/image/Dokter.png";
+import { API } from "../config/api";
+import { useQuery } from "react-query";
 
 const ProfileDr = () => {
+
+    let { data: ProfileDr } = useQuery('ProfileDrCache', async () => {
+        const response = await API.get('/users');
+        return response.data.data;
+    })
+
     return (
         <>
             <div style={{
@@ -35,144 +43,153 @@ const ProfileDr = () => {
                         }}>
                             Personal Info
                         </h1>
-                        <div className="d-flex" style={{
-                            marginTop: '50px'
-                        }}>
+                        {ProfileDr?.map((item,index) => {
+                           
+                                return (
+                                    <>
+                                        <div className="d-flex" key={index} style={{
+                                            marginTop: '50px'
+                                        }}>
 
-                            <div className="p-2 w-40" styl>
-                                <img src={Name} alt=''></img>
-                            </div>
-                            <div className="p-2 flex-shrink-1">
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '14px',
-                                    height: '20px',
-                                }}>name</h3>
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '12px',
-                                    height: '16px',
-                                    color: '#8A8C90'
-                                }}>
-                                    Fullnama
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="d-flex">
-                            <div className="p-2 w-40">
-                                <img src={Mail} alt=''></img>
-                            </div>
+                                            <div className="p-2 w-40" styl>
+                                                <img src={Name} alt=''></img>
+                                            </div>
+                                            <div className="p-2 flex-shrink-1">
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '14px',
+                                                    height: '20px',
+                                                }}>{item?.fullname}</h3>
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '12px',
+                                                    height: '16px',
+                                                    color: '#8A8C90'
+                                                }}>
+                                                    Fullnama
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex">
+                                            <div className="p-2 w-40">
+                                                <img src={Mail} alt=''></img>
+                                            </div>
 
-                            <div className="p-2 flex-shrink-1">
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '14px',
-                                    height: '20px',
-                                }}>Email</h3>
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '12px',
-                                    height: '16px',
-                                    color: '#8A8C90'
-                                }}>
-                                    Mail
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="d-flex">
-                            <div className="p-2 w-40">
-                                <img src={Status} alt=''></img>
-                            </div>
+                                            <div className="p-2 flex-shrink-1">
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '14px',
+                                                    height: '20px',
+                                                }}>{item?.email}</h3>
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '12px',
+                                                    height: '16px',
+                                                    color: '#8A8C90'
+                                                }}>
+                                                    Mail
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex">
+                                            <div className="p-2 w-40">
+                                                <img src={Status} alt=''></img>
+                                            </div>
 
-                            <div className="p-2 flex-shrink-1">
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '14px',
-                                    height: '20px',
-                                }}>Patient</h3>
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '12px',
-                                    height: '16px',
-                                    color: '#8A8C90'
-                                }}>
-                                    Status
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="d-flex">
-                            <div className="p-2 w-40">
-                                <img src={Gender} alt=''></img>
-                            </div>
+                                            <div className="p-2 flex-shrink-1">
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '14px',
+                                                    height: '20px',
+                                                }}>{item?.role}</h3>
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '12px',
+                                                    height: '16px',
+                                                    color: '#8A8C90'
+                                                }}>
+                                                    Status
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex">
+                                            <div className="p-2 w-40">
+                                                <img src={Gender} alt=''></img>
+                                            </div>
 
-                            <div className="p-2 flex-shrink-1">
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '14px',
-                                    height: '20px',
-                                }}>Male</h3>
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '12px',
-                                    height: '16px',
-                                    color: '#8A8C90'
-                                }}>
-                                    Gender
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="d-flex">
-                            <div className="p-2 w-40">
-                                <img src={Phone} alt=''></img>
-                            </div>
-                            <div className="p-2 flex-shrink-1">
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '14px',
-                                    height: '20px',
-                                }}>Phone</h3>
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '12px',
-                                    height: '16px',
-                                    color: '#8A8C90'
-                                }}>
-                                    Phone
-                                </h3>
-                            </div>
-                        </div>
-                        <div className="d-flex">
-                            <div className="p-2 w-40">
-                                <img src={Place} alt=''></img>
-                            </div>
-                            <div className="p-2 flex-shrink-1">
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '14px',
-                                    height: '20px',
-                                }}>Address</h3>
-                                <h3 style={{
-                                    fontFamily: 'Avenir 85 Heavy',
-                                    fontWeight: '500',
-                                    fontSize: '12px',
-                                    height: '16px',
-                                    color: '#8A8C90'
-                                }}>
-                                    Address
-                                </h3>
-                            </div>
-                        </div>
+                                            <div className="p-2 flex-shrink-1">
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '14px',
+                                                    height: '20px',
+                                                }}>{item?.gender}</h3>
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '12px',
+                                                    height: '16px',
+                                                    color: '#8A8C90'
+                                                }}>
+                                                    Gender
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex">
+                                            <div className="p-2 w-40">
+                                                <img src={Phone} alt=''></img>
+                                            </div>
+                                            <div className="p-2 flex-shrink-1">
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '14px',
+                                                    height: '20px',
+                                                }}>{item?.phone}</h3>
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '12px',
+                                                    height: '16px',
+                                                    color: '#8A8C90'
+                                                }}>
+                                                    Phone
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div className="d-flex">
+                                            <div className="p-2 w-40">
+                                                <img src={Place} alt=''></img>
+                                            </div>
+                                            <div className="p-2 flex-shrink-1">
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '14px',
+                                                    height: '20px',
+                                                }}>{item?.address}</h3>
+                                                <h3 style={{
+                                                    fontFamily: 'Avenir 85 Heavy',
+                                                    fontWeight: '500',
+                                                    fontSize: '12px',
+                                                    height: '16px',
+                                                    color: '#8A8C90'
+                                                }}>
+                                                    Address
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                            
+                        }
+                        )}
                     </div>
                     <div className="p-2" style={{
                         width: '40%',

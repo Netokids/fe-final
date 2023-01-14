@@ -17,79 +17,65 @@ import { API } from './config/api';
 import PrivatePatient from './component/privateRoutePatient';
 import PrivateAdmin from './component/privateAdmin';
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 function App() {
-  let navigate = useNavigate()
-
-  if (localStorage.token) {
-    setAuthToken(localStorage.token)
-  }
-
   const [state, dispatch] = useContext(UserContext)
-
-
-  useEffect(() => {
-    // Redirect Auth
-    if (state.isLogin === false) {
-      navigate('/');
-    } else {
-      if (state.user.role === 'doctor') {
-        navigate('/formReservasi');
-      } else if (state.user.role === 'patient') {
-        navigate('/');
-      }
-    }
-  }, [state]);
-
-  console.log(state)
+  console.log(state)  
 
   const checkUser = async () => {
     try {
-      const response = await API.get('/check-auth')
+      const response = await API.get('/check-auth');
 
+      // If the token incorrect
       if (response.status === 404) {
         return dispatch({
           type: 'AUTH_ERROR',
-        })
+        });
       }
 
-      let payload = response.data.data
-      payload.token = localStorage.token
+      // Get user data
+      let payload = response.data.data;
+      // Get token from local storage
+      payload.token = localStorage.token;
 
+      // Send data to useContext
       dispatch({
         type: 'USER_SUCCESS',
         payload,
-      })
+      });
     } catch (error) {
       console.log(error);
     }
-  }
-
-  console.log(state);
+  };
 
   useEffect(() => {
-    checkUser()
-  }, [])
+    if (localStorage.token) {
+      checkUser();
+    }
+  }, []);
 
   return (
     <>
 
       <NavigationBar />
       <Routes>
-
-
-        <Route path="/" element={<Home />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/detail/:id" element={<Detail />} />
         <Route element={<PrivatePatient />}>
-          <Route path="/konsultasi" element={<FormConsultation />} /> 
-          <Route path="/profile/:id" element={<Profile />}></Route>
-          <Route path="/inbox/:id" element={<Inbox />} />
+          <Route exact path="/konsultasi" element={<FormConsultation />} />
+          <Route exact path="/profile/:id" element={<Profile />}></Route>
+          <Route exact path="/inbox/:id" element={<Inbox />} />
         </Route>
         <Route element={<PrivateAdmin />}>
-          <Route path="/formReservasi" element={<FormReservasi />} />
-          <Route path="/formArticle" element={<FormArticle />} />
-          <Route path="/profileDr" element={<ProfileDr />} />
+          <Route exact path="/formReservasi" element={<FormReservasi />} />
+          <Route exact path="/formArticle" element={<FormArticle />} />
+          <Route exact path="/profileDr" element={<ProfileDr />} />
         </Route>
 
-        <Route path="/detail/:id" element={<Detail />} />
+        
 
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>

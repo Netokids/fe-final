@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import Pasien from "../assets/image/pasien.png";
 import { API } from "../config/api"
 import { useParams } from "react-router-dom";
+import DoctorNav from "../assets/image/doctornav.png";
 import moment from 'moment'
 
 const Inbox = () => {
@@ -35,20 +36,22 @@ const Inbox = () => {
                     margin: '20px'
                 }}>
 
-                    {cosultation1?.map((item) => {
+                    {cosultation1?.map((item, index) => {
                         if (item.user.id == id) {
                             return (
-                                <Card style={{ width: '100%', height: '100%', marginRight: '20px', marginBottom: '30px' }}>
+                                <Card key={index} style={{ width: '100%', height: '100%', marginRight: '20px', marginBottom: '30px' }}>
                                     <Row>
-                                        <Col xs={1} style={{
+                                        <Col xs={2} style={{
                                             marginLeft: '20px',
                                         }}>
                                             <Card.Img variant="top" src={Pasien} alt="" style={{
                                                 width: '120px',
                                                 padding: '20px',
+                                                alignItems: 'center',
+                                                marginLeft: '40px',
                                             }} />
                                         </Col>
-                                        <Col xs={10}>
+                                        <Col xs={7}>
                                             <Card.Body>
                                                 <div>
                                                     <div style={{
@@ -56,8 +59,8 @@ const Inbox = () => {
                                                     }}>
                                                         <h4 style={{ fontWeight: "700" }}>{item?.subject}</h4>
                                                         <small className="text-muted">
-                                                            Reservasi Dibuat:{" "}
-                                                            {moment(item?.updatedAt).format("DD MMMM YYYY")}
+                                                            Live Consultation:{" "}
+                                                            {moment(item?.dateconsul).format("DD MMMM YYYY")}
                                                         </small>
                                                         <div className="mt-1 cons-box">Keluhan: {item?.description}</div>
                                                     </div>
@@ -70,6 +73,9 @@ const Inbox = () => {
                                                 </div>
                                             </Card.Body>
                                         </Col>
+                                        <Col style={{ marginLeft: '60px', marginTop: '25px' }}>
+                                            <h4 style={{ fontWeight: "bold", fontSize: "14px" }}> {moment(item?.CreatedAt).format("DD MMMM YYYY")}</h4>
+                                        </Col>
                                     </Row>
                                     <hr />
                                     {item?.reply == "" ? (
@@ -79,36 +85,35 @@ const Inbox = () => {
                                             </div>
                                         </Card.Footer>
                                     ) : (
-                                        <Card style={{ width: '80%', height: '100%', marginLeft: '150px', marginBottom: '30px' }}>
-                                            <Row>
-                                                <Col xs={2}>
-                                                    <Card.Img variant="top" src={Pasien} alt="" style={{
-                                                        width: '120px',
-                                                        padding: '20px',
-                                                    }} />
-                                                </Col>
-                                                <Col xs={10}>
-                                                    <Card.Body style={{
-                                                        alignSelf: 'center',
-                                                    }}>
-                                                        <div className="inboxfoot-right mt-3">
-                                                            {item?.reply}
-                                                            {item?.status === "Cancel" ? <></> : <>
-                                                                <a
-                                                                    href={`${item?.link}`}
-                                                                    target="_blank"
-                                                                    rel="noreferrer"
-                                                                    className="ms-2"
-                                                                >
-                                                                    Here
-                                                                </a></>}
 
-                                                            <p className="mt-2">Hallo corona</p>
-                                                        </div>
-                                                    </Card.Body>
-                                                </Col>
-                                            </Row>
-                                        </Card>
+                                        <Row style={{ width: '80%', height: '100%', marginLeft: '150px', marginBottom: '30px' }}>
+                                            <Col xs={2}>
+                                                <Card.Img variant="top" src={DoctorNav} alt="" style={{
+                                                    width: '120px',
+                                                    padding: '20px',
+                                                }} />
+                                            </Col>
+                                            <Col xs={10}>
+                                                <Card.Body style={{
+                                                    alignSelf: 'center',
+                                                }}>
+                                                    <div className="inboxfoot-right mt-3">
+                                                        {item?.reply}
+                                                        {item?.status === "Cancel" ? <></> : <>
+                                                            <a
+                                                                href={`${item?.link}`}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                                className="ms-2"
+                                                            >
+                                                                Here
+                                                            </a></>}
+
+                                                        <p className="mt-2">Hallo corona</p>
+                                                    </div>
+                                                </Card.Body>
+                                            </Col>
+                                        </Row>
                                     )}
 
                                 </Card>

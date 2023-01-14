@@ -7,8 +7,11 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { API } from "../config/api";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/userContext";
+import { useContext } from "react";
 
 const FormConsultation = () => {
+    const [state] = useContext(UserContext);
     let navigate = useNavigate();
     const [form, setForm] = useState({
         fullname: '',
@@ -54,7 +57,7 @@ const FormConsultation = () => {
 
             const response = await API.post('/consultations', formData, config);
             alert('Konsultasi Berhasil, Harap Menunggu Balasan dari Dokter');
-            navigate('/inbox/:id')
+            navigate('/inbox/' + state.user.id)
         } catch (error) {
             console.log(error);
         }

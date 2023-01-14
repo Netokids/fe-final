@@ -5,18 +5,14 @@ import { UserContext } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const navigate = useNavigate();
-    const [state] = useContext(UserContext);
-    useEffect(() => {
-        if (state.isLogin === false) {
-           if(state.user.role === 'doctor') {
-               navigate('/formReservasi');
-           }
-        } else {
-            navigate('/');
-        }
-    }, [state]);
+    let navigate = useNavigate();
+    const [state, dispatch] = useContext(UserContext);
 
+    // jika sewaktu halaman dirender pertama kali ada local storage isAdmin maka navigate
+    useEffect(() => {
+        state.user.role === "doctor" &&
+            navigate("/formReservasi");
+    });
     return (
         <>
             <Jumbotron />

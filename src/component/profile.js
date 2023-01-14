@@ -46,11 +46,11 @@ const Profile = () => {
                         }}>
                             Personal Info
                         </h1>
-                        {Profile?.map((item) => {
+                        {Profile?.map((item,index) => {
                             if (item?.id == id) {
                                 return (
                                     <>
-                                        <div className="d-flex" style={{
+                                        <div className="d-flex" key={index} style={{
                                             marginTop: '50px'
                                         }}>
 
