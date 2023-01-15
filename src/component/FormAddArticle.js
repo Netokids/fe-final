@@ -40,7 +40,7 @@ const FormArticle = () => {
 
             const response = await API.post('/articles', formData, config);
             alert('Article Added');
-            navigate('/formreservasi')
+            navigate('/')
         } catch(error){
             console.log(error);
         }

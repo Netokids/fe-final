@@ -6,9 +6,11 @@ import moment from 'moment'
 import { API } from "../config/api";
 import { useNavigate } from "react-router-dom";
 
+
 const ModalReservation = ({ show, setShow, value, reservasiId }) => {
 
     let navigate = useNavigate();
+
     const [form, setForm] = useState({
         fullname: '',
         phone: '',
@@ -59,7 +61,7 @@ const ModalReservation = ({ show, setShow, value, reservasiId }) => {
 
             alert('Anda Telah Menyetujui Konsultasi Pasien');
             setShow(false);
-            navigate('/formReservasi')
+            navigate(`/`)
 
         } catch (error) {
             console.log(error);
@@ -92,7 +94,7 @@ const ModalReservation = ({ show, setShow, value, reservasiId }) => {
 
             alert('Anda Telah Menolak Konsultasi Pasien');
             setShow(false);
-            navigate('/formReservasi')
+            navigate(`/`)
 
         } catch (error) {
             console.log(error);
@@ -131,7 +133,7 @@ const ModalReservation = ({ show, setShow, value, reservasiId }) => {
                                     {value?.subject}
                                 </h5>
                                 <p>
-                                    {value?.description}
+                                    Keluhan: {value?.description}
                                 </p>
                             </Col>
                             <Col xs={2}>

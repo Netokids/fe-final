@@ -11,7 +11,7 @@ const Home = () => {
     // jika sewaktu halaman dirender pertama kali ada local storage isAdmin maka navigate
     useEffect(() => {
         state.user.role === "doctor" &&
-            navigate("/formReservasi");
+            navigate(`/formReservasi/${state.user.id}`);
     });
     return (
         <>

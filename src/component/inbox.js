@@ -109,7 +109,9 @@ const Inbox = () => {
                                                                 Here
                                                             </a></>}
 
-                                                        <p className="mt-2">Hallo corona</p>
+                                                        <p style={{ color: "#ff6185", fontWeight: "700" }}>
+                                                            Dr. {item?.doctor.fullname}
+                                                        </p>
                                                     </div>
                                                 </Card.Body>
                                             </Col>
@@ -118,11 +120,8 @@ const Inbox = () => {
 
                                 </Card>
                             )
-                        } else {
                         }
-
                     })}
-
                 </div>
             </div>
         </>

@@ -9,9 +9,10 @@ import Place from "../assets/image/place.png";
 import Dokter from "../assets/image/Dokter.png";
 import { API } from "../config/api";
 import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 
 const ProfileDr = () => {
-
+    const { id } = useParams();
     let { data: ProfileDr } = useQuery('ProfileDrCache', async () => {
         const response = await API.get('/users');
         return response.data.data;
@@ -44,7 +45,7 @@ const ProfileDr = () => {
                             Personal Info
                         </h1>
                         {ProfileDr?.map((item,index) => {
-                           
+                            if (item?.id == id) {
                                 return (
                                     <>
                                         <div className="d-flex" key={index} style={{
@@ -187,7 +188,7 @@ const ProfileDr = () => {
                                         </div>
                                     </>
                                 )
-                            
+                            }
                         }
                         )}
                     </div>

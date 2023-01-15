@@ -9,6 +9,7 @@ import { API } from "../config/api";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import { useContext } from "react";
+import { useQuery } from "react-query";
 
 const FormConsultation = () => {
     const [state] = useContext(UserContext);
@@ -23,7 +24,8 @@ const FormConsultation = () => {
         gender: '',
         subject: '',
         dateconsul: '',
-        description: ''
+        description: '',
+        doctor_id   : ''
     })
 
     console.log(form);
@@ -52,8 +54,9 @@ const FormConsultation = () => {
             formData.append('weight', form.weight);
             formData.append('gender', form.gender);
             formData.append('subject', form.subject);
-            formData.append('dateconsul', form.dateconsul); 
+            formData.append('dateconsul', form.dateconsul);
             formData.append('description', form.description);
+            formData.append('doctor_id', form.doctor_id);
 
             const response = await API.post('/consultations', formData, config);
             alert('Konsultasi Berhasil, Harap Menunggu Balasan dari Dokter');
@@ -62,7 +65,11 @@ const FormConsultation = () => {
             console.log(error);
         }
     })
-
+    
+    let {data : dataUser} = useQuery('userCache', async () => {
+        const response = await API.get('/users');
+        return response.data.data;
+    })
     return (
         <>
             <div className="add-trip-container">
@@ -78,32 +85,32 @@ const FormConsultation = () => {
                 <Form className='form-add-trip' onSubmit={(e) => handleSubmitCons.mutate(e)}>
                     <Form.Group className="form-group" >
                         <Form.Label>Fullname</Form.Label>
-                        <Form.Control className="form-input" type="text" name="fullname" onChange={handleChange}/>
+                        <Form.Control className="form-input" type="text" name="fullname" onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group className="form-group form-dropdown" controlId="formBasicPassword">
                         <Form.Label>Phone</Form.Label>
                         <img src={dropdown} alt="" className="dropdown" />
-                        <Form.Control className="form-input" type="text" name="phone" onChange={handleChange}/>
+                        <Form.Control className="form-input" type="text" name="phone" onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group className="form-group" >
                         <Row>
                             <Col xs={6}>
                                 <Form.Label>Born Date</Form.Label>
-                                <Form.Control className="form-input" type="date" name="borndate" onChange={handleChange}/>
+                                <Form.Control className="form-input" type="date" name="borndate" onChange={handleChange} />
                             </Col>
                             <Col xs={2}>
                                 <Form.Label>Age</Form.Label>
-                                <Form.Control className="form-input" type="text" name="age" onChange={handleChange}/>
+                                <Form.Control className="form-input" type="text" name="age" onChange={handleChange} />
                             </Col>
                             <Col xs={2}>
                                 <Form.Label>Height</Form.Label>
-                                <Form.Control className="form-input" type="text" name="height" onChange={handleChange}/>
+                                <Form.Control className="form-input" type="text" name="height" onChange={handleChange} />
                             </Col>
                             <Col xs={2}>
                                 <Form.Label>Weight</Form.Label>
-                                <Form.Control className="form-input" type="text" name="weight" onChange={handleChange}/>
+                                <Form.Control className="form-input" type="text" name="weight" onChange={handleChange} />
                             </Col>
                         </Row>
                     </Form.Group>
@@ -120,19 +127,33 @@ const FormConsultation = () => {
 
                     <Form.Group className="form-group" >
                         <Form.Label>Subject</Form.Label>
-                        <Form.Control className="form-input" type="text" name="subject" onChange={handleChange}/>
+                        <Form.Control className="form-input" type="text" name="subject" onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group className="form-group" >
                         <Form.Label>Live Consultation Date</Form.Label>
-                        <Form.Control className="form-input" type="date" name="dateconsul" onChange={handleChange}/>
+                        <Form.Control className="form-input" type="date" name="dateconsul" onChange={handleChange} />
                     </Form.Group>
 
                     <Form.Group className="form-group" >
                         <Form.Label>Description</Form.Label>
                         <FloatingLabel controlId="floatingTextarea2">
-                            <Form.Control as="textarea" className="form-input" style={{ height: '100px' }} name="description" onChange={handleChange}/>
+                            <Form.Control as="textarea" className="form-input" style={{ height: '100px' }} name="description" onChange={handleChange} />
                         </FloatingLabel>
+                    </Form.Group>
+
+                    <Form.Group className="form-group form-dropdown" controlId="formBasicPassword">
+                        <Form.Label>Dokter</Form.Label>
+                        <img src={dropdown} alt="" className="dropdown" />
+                        <Form.Select aria-label="Default select example" className="form-input" name="doctor_id" onChange={handleChange}>
+                            <option>Choose Dokter</option>
+                            {dataUser?.map((dataUser) => 
+                                dataUser.role === 'doctor' ? (
+                                    <option value={dataUser.id}>Dr. {dataUser.fullname}</option>
+                                ) : null
+                            )}
+
+                        </Form.Select>
                     </Form.Group>
 
                     <Button type="submit" className='button-add-trip' style={{

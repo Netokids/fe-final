@@ -16,6 +16,7 @@ import { setAuthToken } from './config/api';
 import { API } from './config/api';
 import PrivatePatient from './component/privateRoutePatient';
 import PrivateAdmin from './component/privateAdmin';
+import RegisterDoctor from './component/registerDoctor';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -70,13 +71,13 @@ function App() {
           <Route exact path="/inbox/:id" element={<Inbox />} />
         </Route>
         <Route element={<PrivateAdmin />}>
-          <Route exact path="/formReservasi" element={<FormReservasi />} />
+          <Route exact path="/formReservasi/:id" element={<FormReservasi />} />
           <Route exact path="/formArticle" element={<FormArticle />} />
-          <Route exact path="/profileDr" element={<ProfileDr />} />
+          <Route exact path="/profileDr/:id" element={<ProfileDr />} />
         </Route>
 
         
-
+        <Route exact path="/registerDoctor" element={<RegisterDoctor />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </>

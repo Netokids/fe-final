@@ -154,7 +154,7 @@ const NavigationBar = () => {
 
                                         <Dropdown.Menu>
                                             <Dropdown.Item
-                                                onClick={() => navigate('/profileDr')}
+                                                onClick={() => navigate(`/profileDr/${state.user.id}`)}
                                             ><img src={Profile} alt="" style={{
                                                 margin: '10px'
                                             }}></img>Profile</Dropdown.Item>
