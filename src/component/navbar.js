@@ -15,6 +15,7 @@ import ImageNav from "../assets/image/ImgNav.png";
 import Profile from "../assets/image/navuser.png";
 import Consultation from "../assets/image/emailnav.png";
 import DoctorNav from "../assets/image/doctornav.png";
+import { useQuery } from "react-query";
 
 
 const NavigationBar = () => {
@@ -126,6 +127,10 @@ const NavigationBar = () => {
         window.location.reload();
     };
 
+    let {data : navImage } = useQuery('ProfileCache', async () => {
+        const response = await API.get('/users')
+        return response.data.data
+    })
 
     return (
         <>
@@ -146,10 +151,15 @@ const NavigationBar = () => {
                                             backgroundColor: 'transparent',
                                             border: 'none',
                                         }}>
-                                            <img src={DoctorNav} alt="" style={{
-                                                width: '60px',
-                                                height: '60px',
-                                            }} />
+                                            {navImage.map((item) => {
+                                                if (item.id === state.user.id) {
+                                                    return <img src={item.image} alt="" style={{
+                                                        width: '60px',
+                                                        height: '60px',
+                                                        borderRadius: '50%',
+                                                    }} />
+                                                }
+                                            })}
                                         </Dropdown.Toggle>
 
                                         <Dropdown.Menu>
@@ -175,10 +185,15 @@ const NavigationBar = () => {
                                             backgroundColor: 'transparent',
                                             border: 'none',
                                         }}>
-                                            <img src={ImageNav} alt="" style={{
-                                                width: '60px',
-                                                height: '60px',
-                                            }} />
+                                            {navImage.map((item) => {
+                                                if (item.id === state.user.id) {
+                                                    return <img src={item.image} alt="" style={{
+                                                        width: '60px',
+                                                        height: '60px',
+                                                        borderRadius: '50%',
+                                                    }} />
+                                                }
+                                            })}
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu>
                                             <Dropdown.Item onClick={() => navigate(`/profile/${state?.user.id}`)}><img src={Profile} alt="" style={{

@@ -1,10 +1,8 @@
 import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { useQuery } from "react-query";
-import Pasien from "../assets/image/pasien.png";
 import { API } from "../config/api"
 import { useParams } from "react-router-dom";
-import DoctorNav from "../assets/image/doctornav.png";
 import moment from 'moment'
 
 const Inbox = () => {
@@ -44,11 +42,12 @@ const Inbox = () => {
                                         <Col xs={2} style={{
                                             marginLeft: '20px',
                                         }}>
-                                            <Card.Img variant="top" src={Pasien} alt="" style={{
+                                            <Card.Img variant="top" src={item.user.image} alt="" style={{
                                                 width: '120px',
                                                 padding: '20px',
                                                 alignItems: 'center',
                                                 marginLeft: '40px',
+                                                borderRadius: '50%',    
                                             }} />
                                         </Col>
                                         <Col xs={7}>
@@ -88,9 +87,11 @@ const Inbox = () => {
 
                                         <Row style={{ width: '80%', height: '100%', marginLeft: '150px', marginBottom: '30px' }}>
                                             <Col xs={2}>
-                                                <Card.Img variant="top" src={DoctorNav} alt="" style={{
+                                                <Card.Img variant="top" src={item.doctor.image} alt="" style={{
                                                     width: '120px',
+                                                
                                                     padding: '20px',
+                                                    borderRadius: '50%',
                                                 }} />
                                             </Col>
                                             <Col xs={10}>
